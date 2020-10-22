@@ -1,3 +1,3 @@
- # Templates for openSUSE-KIWI Image System
+ # Templates for POWER created using openSUSE-KIWI Image System 
 
  Oficial [Documentation](https://osinside.github.io/kiwi/)
