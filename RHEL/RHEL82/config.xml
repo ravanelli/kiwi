@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<image schemaversion="6.1" name="RHEL82">
+    <description type="system">
+        <author>Renata Andrade Matos Ravanelli</author>
+        <contact>rmatos@br.ibm.com</contact>
+        <specification>RHEL 8.2 IBM CLOUD</specification>
+    </description>
+	    
+   <profiles>
+        <profile name="raw-xfs" description="RHEL" arch="ppc64le"/>
+        <profile name="raw-xfs-cloud-init" description="RHEL 8.2 with cloud-init" arch="ppc64le"/>
+   </profiles>
+
+    <preferences>
+	<version>2.0.0</version>
+        <packagemanager>yum</packagemanager>
+        <bootsplash-theme>charge</bootsplash-theme>
+        <bootloader-theme>breeze</bootloader-theme>
+        <keytable>us.map.gz</keytable>
+	<timezone>UTC</timezone>
+	
+        <type
+            image="oem"
+            firmware="ofw"
+            initrd_system="dracut"
+            bootloader="grub2"
+            bootloader_console="console"
+            bootpartition="false"
+            kernelcmdline="systemd.show_status=0 plymouth.enable=0"
+            filesystem="xfs"
+            devicepersistency="by-label">
+	    <size unit="G">30</size>
+            <oemconfig>
+                <oem-systemsize>32212254720</oem-systemsize>
+                <oem-swap>true</oem-swap>
+                <oem-device-filter>/dev/ram</oem-device-filter>
+                <oem-multipath-scan>true</oem-multipath-scan>
+            </oemconfig>
+        </type>
+    </preferences>
+
+    <users>
+        <user name="root" home="/root" pwdformat="plain" password="root" groups="root" />
+    </users>
+
+    <repository type="rpm-dir" priority="1" >
+	<source path='dir:///root/RHEL/packages/' />
+    </repository>
+
+    <repository type="rpm-md">
+        <source path="ftp://public.dhe.ibm.com/software/server/POWER/Linux/yum/OSS/RHEL/8/ppc64le/" />
+    </repository>
+
+    <packages type="image">
+	<namedCollection name="core"/>
+	<package name="basesystem"/>
+        <package name="cloud-init-19.1"/>
+        <package name="lvm2"/>
+        <package name="cifs-utils"/>
+        <package name="device-mapper-multipath"/>
+        <package name="dbus-glib"/>
+        <package name="dbus-libs"/>
+        <package name="filesystem"/>
+        <package name="iscsi-initiator-utils"/>
+        <package name="kernel" bootinclude="true" />
+        <package name="kernel-firmware"/>
+        <package name="kexec-tools"/>
+        <package name="keyutils"/>
+	<package name="udev"/>
+	<package name="nfs-utils"/>
+        <package name="rpcbind"/>
+	<package name="plymouth-theme-charge"/>
+	<package name="grub2-ppc64le"/>
+        <package name="grub2-ppc64le-modules"/>
+    </packages>
+    <packages type="oem">
+        <package name="dracut-kiwi-oem-repart"/>
+        <package name="dracut-kiwi-oem-dump"/>
+    </packages>
+    <packages type="bootstrap">
+        <package name="ca-certificates"/>
+        <package name="filesystem"/>
+	<package name="lvm2"/>
+	<package name="glibc-langpack-en"/>
+        <package name="basesystem"/>
+	<package name="udev"/>
+	<package name="grub2-ppc64le"/>
+	<package name="grub2-ppc64le-modules"/>
+	<package name="redhat-release-server"/>
+    </packages>
+</image>
