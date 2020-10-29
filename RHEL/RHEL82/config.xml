@@ -87,6 +87,6 @@
 	<package name="udev"/>
 	<package name="grub2-ppc64le"/>
 	<package name="grub2-ppc64le-modules"/>
-	<package name="redhat-release-server"/>
+	<package name="redhat-release-8.2"/>
     </packages>
 </image>
